@@ -82,6 +82,8 @@
         height: 700px;
         align-items: center;
         justify-content: center;
+
+        background-color: #e3fafa;
       }
       .angry div {
         padding: 40px;
@@ -101,13 +103,15 @@
       var scene = new ScrollMagic.Scene({
         triggerElement: '.angry div' /* We use same element as trigger, look how "start 1. Angry" floats on screen, this is not very good */
       })
-      .setTween('.angry div', 0.5, {
+      .setTween('.angry div', 0.5, { /* Tween duration (second parameter) can be omitted it defaults to 1 */
         backgroundColor: 'green',
         scale: 2.5
       }) // Trigger a gsap.to() tween
       .addIndicators({ name: '1. Angry' }) // add indicators (requires plugin)
       .addTo(controller);
     </script>
+
+    <div style="height: 300px;"></div>
 
     <!----------------------------------->
     <!-- Basic animation triggered on scroll distance -->
@@ -142,7 +146,7 @@
         triggerElement: '.smurf', /* Triggering it on '.smurf div' would be a bad idea, because it conflicts with the animation, as top border of div changes */
         duration: 400 /* In pixels */
       })
-      .setTween('.smurf div', { /* Tween duration (second parameter) can be omitted it defaults to 1 */
+      .setTween('.smurf div', { /* Tween duration does not matter when we have duration on the Scene, because it would be attached to scroll position */
         rotate: 360,
         height: 400,
         width: 100,
@@ -154,9 +158,106 @@
       .addTo(controller);
     </script>
 
+    <div style="height: 300px;"></div>
+
     <!----------------------------------->
-    <!-- Basic pin of a small section -->
+    <!-- Basic pin of a floating div box -->
     <!----------------------------------->
+    <style>
+      .stay-a-while-wrapper {
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+      }
+
+      .stay-a-while-div {
+        background-color: #aa9;
+      }
+
+      .stay-a-while-span {
+        background-color: #aaaae8;
+      }
+
+      .stay-a-while-box {
+        background-color: #eeaae8;
+        width: 100%;
+        margin: 0 auto;
+        max-width: 200px;
+      }
+
+    </style>
+
+    <div id="stay-a-while-trigger"></div> <!-- Trigger can be seperate div -->
+
+    <div class="stay-a-while-wrapper"> <!-- This wrapper will grow with ScrollMagic pin height adjusting auto-element -->
+      <div class="stay-a-while-pin"> <!-- Everything inside this container will be pinned (position: fixed;)-->
+        <div class="stay-a-while-div">Stay a While please :)</div>
+        <span class="stay-a-while-span">Hello</span>
+        <div class="stay-a-while-box">This box will stay a while</div>
+      </div>
+    </div>
+
+    <script>
+      // Build scene
+      var scene = new ScrollMagic.Scene({
+        triggerElement: '#stay-a-while-trigger',
+        duration: 400, /* In pixels */
+      })
+      .setPin('.stay-a-while-pin') /* Pins everything inside that container */
+      .addIndicators({ name: '3. Stay a while' }) // add indicators (requires plugin)
+      .addTo(controller);
+    </script>
+
+    <div style="height: 300px;"></div>
+
+    <!----------------------------------->
+    <!-- Basic pin overlapping next section -->
+    <!----------------------------------->
+    <style>
+      .lapskaus-wrapper {
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(207,189,119,1) 0%, rgba(0,212,255,1) 100%);
+      }
+
+      .lapskaus-box {
+        background-color: #000;
+        color: #fff;
+        margin: 0 auto;
+        max-width: 300px;
+        font-size: 24px;
+        text-align: center;
+      }
+
+      .lapskaus-another-section {
+        height: 600px;
+        text-align: center;
+        padding-top: 40px;
+        background-color: #ddd;
+      }
+    </style>
+
+    <div class="lapskaus-wrapper">
+      <div class="lapskaus-pin"> <!-- Everything inside this container will be pinned (position: fixed;) -->
+        <div class="lapskaus-box">Lapskaus is a good meal</div>
+        <div class="lapskaus-box">I love it!</div>
+      </div>
+    </div>
+
+    <div class="lapskaus-another-section">
+      This is another section, that will be overlapped by lapskaus
+    </div>
+
+    <script>
+      // Build scene
+      var scene = new ScrollMagic.Scene({
+        triggerElement: '.lapskaus-wrapper',
+        duration: 600, /* In pixels */
+      })
+      .setPin('.lapskaus-pin', { pushFollowers: false }) /* Pins everything inside this container */
+      .addIndicators({ name: '4. Overlapskaus' }) // add indicators (requires plugin)
+      .addTo(controller);
+    </script>
+
+    <div style="height: 300px;"></div>
 
     <!----------------------------------->
     <!-- Fillers -->
