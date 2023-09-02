@@ -213,7 +213,7 @@
     <!-- Basic pin overlapping next section -->
     <!----------------------------------->
     <style>
-      .lapskaus-wrapper {
+      .lapskaus-wrapper { /* We use wrapper to define background behind lapskaus-box */
         background: rgb(2,0,36);
         background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(207,189,119,1) 0%, rgba(0,212,255,1) 100%);
       }
@@ -254,6 +254,39 @@
       })
       .setPin('.lapskaus-pin', { pushFollowers: false }) /* Pins everything inside this container */
       .addIndicators({ name: '4. Overlapskaus' }) // add indicators (requires plugin)
+      .addTo(controller);
+    </script>
+
+    <div style="height: 300px;"></div>
+
+    <!----------------------------------->
+    <!-- Basic pin of full height & width section -->
+    <!----------------------------------->
+    <style>
+      .big-one {
+        height: 100vh;
+        background-image: url('/header-grey.jpg');
+        background-size: cover;
+        background-position: bottom center;
+      }
+    </style>
+
+    <div class="big-one-trigger"></div>
+    <div class="big-one-pin"> <!-- Everything inside this container will be pinned (position: fixed;) -->
+      <div class="big-one">
+        Big section here
+      </div>
+    </div>
+
+    <script>
+      // Build scene
+      var scene = new ScrollMagic.Scene({
+        triggerElement: '.big-one-trigger',
+        triggerHook: 'onLeave', /* We add a new triggerHook only for this scene, onLeave is on the top, so that scrollmagic triggers when element has allready been on screen and leaves */
+        duration: '100%' /* All inner width of scroll container */
+      })
+      .setPin('.big-one-pin') /* Pins everything inside this container */
+      .addIndicators({ name: '5. Big One' }) // add indicators (requires plugin)
       .addTo(controller);
     </script>
 
