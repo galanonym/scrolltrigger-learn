@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Learning ScrollMagic</title>
+    <title>Basics - Learning ScrollMagic</title>
     <style>
       * {
         padding: 0px;
@@ -66,7 +66,10 @@
 
     <div class="instructions box-shadow">
       <div>
-        <h3>Instructions and Notes for ScrollMagic Learning</h3>
+        Menu:
+        <a href="/onleave.html">onLeave</a>
+        <br><br>
+        <h3>Basic of ScrollMagic Learning</h3>
         <p>Install / Download link for GSAP: <a href="https://greensock.com/docs/v3/Installation">https://greensock.com/docs/v3/Installation</a></p>
         <p>CSS properties documentation: <a href="https://greensock.com/docs/v3/GSAP/CorePlugins/CSSPlugin">https://greensock.com/docs/v3/GSAP/CorePlugins/CSSPlugin</a></p>
       </div>
@@ -255,39 +258,6 @@
       })
       .setPin('.lapskaus-pin', { pushFollowers: false }) /* Pins everything inside this container */
       .addIndicators({ name: '4. Overlapskaus' }) // add indicators (requires plugin)
-      .addTo(controller);
-    </script>
-
-    <div style="height: 300px;"></div>
-
-    <!----------------------------------->
-    <!-- Basic pin of full height & width section -->
-    <!----------------------------------->
-    <style>
-      .big-one {
-        height: 100vh;
-        background-image: url('/header-grey.jpg');
-        background-size: cover;
-        background-position: bottom center;
-      }
-    </style>
-
-    <div class="big-one-trigger"></div>
-    <div class="big-one-pin"> <!-- Everything inside this container will be pinned (position: fixed;) -->
-      <div class="big-one">
-        Big section here
-      </div>
-    </div>
-
-    <script>
-      // Build scene
-      var scene = new ScrollMagic.Scene({
-        triggerElement: '.big-one-trigger',
-        triggerHook: 'onLeave', /* We add a new triggerHook only for this scene, onLeave is on the top, so that scrollmagic triggers when element has allready been on screen and leaves */
-        duration: '100%' /* All inner width of scroll container */
-      })
-      .setPin('.big-one-pin') /* Pins everything inside this container */
-      .addIndicators({ name: '5. Big One' }) // add indicators (requires plugin)
       .addTo(controller);
     </script>
 
