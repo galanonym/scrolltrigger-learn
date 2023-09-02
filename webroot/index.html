@@ -52,8 +52,60 @@
     </div>
 
     <!----------------------------------->
-    <!-- Basic animation triggered once -->
+    <!-- Basic animation auto played -->
     <!----------------------------------->
+
+    <style>
+      .happy {
+        display: flex;
+        height: 700px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden; /* No horizontal bar on mobile fix */
+
+        background-color: #e3fafa;
+      }
+
+      .happy-happy,
+      .happy-glad,
+      .happy-sunshine {
+        padding: 40px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        border-radius: 5px;
+        color: white;
+      }
+
+      .happy-happy {
+        background-color: #23aa93;
+      }
+
+      .happy-glad {
+        background-color: #537aa3;
+      }
+
+      .happy-sunshine {
+        background-color: #ccb100;
+      }
+
+    </style>
+
+    <div class="happy">
+      <div class="happy-happy">I'm happy!</div>
+      <div class="happy-glad">I'm feeling glad!</div>
+      <div class="happy-sunshine">I've got sunshine!</div>
+    </div>
+
+
+    <script>
+      gsap.set('.happy-happy', {x: -400}); /* First we set the starting conditions */
+      gsap.to('.happy-happy', {
+        x: 0, /* Move happy square to right */
+        rotation: 360, /* While rotating */
+        duration: 3 /* In total 3 seconds */
+      });
+    </script>
 
     <div style="height: 300px;"></div>
 
