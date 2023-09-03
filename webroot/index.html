@@ -21,8 +21,13 @@
       /umd/ - uncompressed versions of the minified files, in UMD format (highly compatible). Typically these are used for older build tools or for debugging (because the source code is human-readable)
       Now GSAP has only one library, no more TweenMax or TweenLight
     -->
-    <script src="/js/3.12.2_gsap/umd/gsap.js"></script>
-    <script src="/js/3.12.2_gsap/umd/ScrollTrigger.js"></script>
+    <script src="js/3.12.2_gsap/umd/gsap.js"></script>
+    <script src="js/3.12.2_gsap/umd/ScrollTrigger.js"></script>
+
+    <script>
+      // To use ScrollTrigger we have to register it with gsap first
+      gsap.registerPlugin(ScrollTrigger);
+    </script>
 
   </head>
   <body>
@@ -58,7 +63,7 @@
     <style>
       .happy {
         display: flex;
-        height: 700px;
+        height: 900px;
         align-items: center;
         justify-content: center;
         flex-direction: column;
@@ -69,10 +74,11 @@
 
       .happy-happy,
       .happy-glad,
-      .happy-sunshine {
+      .happy-sunshine,
+      .happy-bag {
         padding: 40px;
-        margin-top: 40px;
-        margin-bottom: 40px;
+        margin-top: 50px;
+        margin-bottom: 50px;
         border-radius: 5px;
         color: white;
       }
@@ -89,12 +95,20 @@
         background-color: #ccb100;
       }
 
+      .happy-bag {
+        background-color: #aaa;
+      }
+
     </style>
 
     <div class="happy">
       <div class="happy-happy">I'm happy!</div>
+
       <div class="happy-glad">I'm feeling glad!</div>
+
       <div class="happy-sunshine">I've got sunshine!</div>
+
+      <div class="happy-bag">In a bag!<br>(with scrub)</div>
     </div>
 
 
@@ -104,6 +118,53 @@
         x: 0, /* Move happy square to right */
         rotation: 360, /* While rotating */
         duration: 3 /* In total 3 seconds */
+      });
+    </script>
+
+    <script>
+      gsap.set('.happy-glad', {x: -400}); /* Starting conditions, progressive enhancement */
+      gsap.to('.happy-glad', {
+        x: 0, /* Move happy square to right */
+        rotation: 360, /* While rotating */
+        duration: 3,
+        scrollTrigger: {
+          trigger: ".happy-glad", /* The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts. */
+          start: 'top center', /* When top of the trigger, hits center of the screen */
+          // markers: true, /* Show debug markers */
+          // id: "glad" /* Unique id, also added to name of debug markers */
+        }
+      });
+    </script>
+
+    <script>
+      gsap.set('.happy-sunshine', {x: -400}); /* Starting conditions, progressive enhancement */
+      gsap.to('.happy-sunshine', {
+        x: 0, /* Move happy square to right */
+        rotation: 360, /* While rotating */
+        scrollTrigger: {
+          trigger: ".happy-sunshine", /* The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts. */
+          start: "top center", /* When top of the trigger, hits center of the screen */
+          end: "top 300px", /* When top of the trigger, hits 300px down from the top of the scroller */
+          scrub: true, /* Links the animation's progress directly to the ScrollTrigger's progress. */
+          // markers: true, /* Show debug markers */
+          // id: "sunshine" /* Unique id, also added to name of debug markers */
+        }
+      });
+    </script>
+
+    <script>
+      gsap.set('.happy-bag', {x: -400}); /* Starting conditions, progressive enhancement */
+      gsap.to('.happy-bag', {
+        x: 0, /* Move happy square to right */
+        rotation: 360, /* While rotating */
+        scrollTrigger: {
+          trigger: ".happy-bag", /* The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts. */
+          start: "top center", /* When top of the trigger, hits center of the screen */
+          end: "top 300px", /* When top of the trigger, hits 300px down from the top of the scroller */
+          scrub: 1, /* Links to scrollbar, with delay of 1 sec, to smooth things out */
+          markers: true, /* Show debug markers */
+          id: "bag" /* Unique id, also added to name of debug markers */
+        }
       });
     </script>
 
