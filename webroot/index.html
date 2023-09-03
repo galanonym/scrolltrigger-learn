@@ -22,11 +22,17 @@
       Now GSAP has only one library, no more TweenMax or TweenLight
     -->
     <script src="js/3.12.2_gsap/umd/gsap.js"></script>
-    <script src="js/3.12.2_gsap/umd/ScrollTrigger.js"></script>
 
+    <script src="js/3.12.2_gsap/umd/ScrollTrigger.js"></script>
     <script>
       // To use ScrollTrigger we have to register it with gsap first
       gsap.registerPlugin(ScrollTrigger);
+    </script>
+
+    <script src="js/3.12.2_gsap/umd/TextPlugin.js"></script>
+    <script>
+      // To use TextPlugin we have to register it with gsap first
+      gsap.registerPlugin(TextPlugin);
     </script>
 
   </head>
@@ -53,11 +59,12 @@
         <br><br>
         <h3>ScrollTrigger Learning</h3>
         <p>Instructions and tips for ScrollTrigger</p>
+        <p>Best documentation to follow is: <a href="https://greensock.com/docs/v3/Plugins/ScrollTrigger" target="_blank">https://greensock.com/docs/v3/Plugins/ScrollTrigger</a></p>
       </div>
     </div>
 
     <!----------------------------------->
-    <!-- Basic animation auto played -->
+    <!-- Basic animations, auto played, played on scroll once, attached to scroll without and with delay  -->
     <!----------------------------------->
 
     <style>
@@ -111,7 +118,6 @@
       <div class="happy-bag">In a bag!<br>(with scrub)</div>
     </div>
 
-
     <script>
       gsap.set('.happy-happy', {x: -400}); /* First we set the starting conditions */
       gsap.to('.happy-happy', {
@@ -162,12 +168,72 @@
           start: "top center", /* When top of the trigger, hits center of the screen */
           end: "top 300px", /* When top of the trigger, hits 300px down from the top of the scroller */
           scrub: 1, /* Links to scrollbar, with delay of 1 sec, to smooth things out */
-          markers: true, /* Show debug markers */
-          id: "bag" /* Unique id, also added to name of debug markers */
+          // markers: true, /* Show debug markers */
+          // id: "bag" /* Unique id, also added to name of debug markers */
         }
       });
     </script>
 
+    <div style="height: 300px;"></div>
+    <div style="height: 300px; background-color: #666;"></div>
+    <div style="height: 300px;"></div>
+
+    <!----------------------------------->
+    <!-- Animation with timeline attached to scroll -->
+    <!----------------------------------->
+
+    <style>
+      .useless {
+        display: flex;
+        height: 900px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden; /* No horizontal bar on mobile fix */
+
+        background-color: #fafad3;
+      }
+
+      .useless-box {
+        padding: 40px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        border-radius: 5px;
+        color: white;
+        background-color: rgba(252, 187, 89, 1);
+        background-image: linear-gradient(90deg, rgba(252, 187, 89, 1) 0%, rgba(41, 53, 86, 0.65) 100%);
+      }
+
+    </style>
+
+    <div class="useless">
+      <div class="useless-box">I'm useless!</div>
+    </div>
+
+    <script>
+      gsap.set('.useless-box', {x: -400}); /* Starting conditions, progressive enhancement */
+
+      var timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.useless', // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+          start: 'top center', // When top of the trigger, hits center of the screen
+          end: 'bottom center', // When bottom of the trigger (container), hits center of the screen
+          scrub: 1, // Links to scrollbar, with delay of 1 sec, to smooth things out
+          markers: true, // Show debug markers
+          id: "useless" // Unique id, also added to name of debug markers
+        }
+      });
+      timeline.to('.useless-box', {x: 0, rotation: 360, duration: 3}); // It calculates duration of animation based on durations here, so first .to() takes more time
+      timeline.to('.useless-box', {y: -300, duration: 1});
+      timeline.to('.useless-box', {opacity: 0, duration: 0.5});
+      timeline.to('.useless-box', {opacity: 1, duration: 0.5});
+      timeline.to('.useless-box', {text: 'But not for long...', duration: 1}); /* Uses TextPlugin */
+      timeline.to('.useless-box', {y: 0, duration: 1});
+      timeline.to('.useless-box', {rotation: 360, duration: 1});
+    </script>
+
+    <div style="height: 300px;"></div>
+    <div style="height: 300px; background-color: #666;"></div>
     <div style="height: 300px;"></div>
 
     <!----------------------------------->
