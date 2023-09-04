@@ -219,8 +219,8 @@
           start: 'top center', // When top of the trigger, hits center of the screen
           end: 'bottom center', // When bottom of the trigger (container), hits center of the screen
           scrub: 1, // Links to scrollbar, with delay of 1 sec, to smooth things out
-          markers: true, // Show debug markers
-          id: "useless" // Unique id, also added to name of debug markers
+          // markers: true, // Show debug markers
+          // id: "useless" // Unique id, also added to name of debug markers
         }
       });
       timeline.to('.useless-box', {x: 0, rotation: 360, duration: 3}); // It calculates duration of animation based on durations here, so first .to() takes more time
@@ -235,6 +235,64 @@
     <div style="height: 300px;"></div>
     <div style="height: 300px; background-color: #666;"></div>
     <div style="height: 300px;"></div>
+
+    <!----------------------------------->
+    <!-- Basic Pin -->
+    <!----------------------------------->
+    <style>
+      .stay-a-while-section {
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+        height: 500px;
+      }
+
+      .stay-a-while-div {
+        background-color: #aa9;
+      }
+
+      .stay-a-while-span {
+        background-color: #aaaae8;
+      }
+
+      .stay-a-while-box {
+        background-color: #eeaae8;
+        width: 100%;
+        margin: 0 auto;
+        max-width: 200px;
+      }
+    </style>
+
+    <div id="stay-a-while-trigger"></div> <!-- Trigger can be seperate div -->
+
+    <div class="stay-a-while-section"> <!-- This wrapper will grow with ScrollMagic pin height adjusting auto-element -->
+      <div class="stay-a-while-pin"> <!-- Everything inside this container will be pinned (position: fixed;)-->
+        <div class="stay-a-while-div">Stay a WHILE please :)</div>
+        <span class="stay-a-while-span">Just a little while...</span>
+        <div class="stay-a-while-box">This box will stay a while</div>
+      </div>
+    </div>
+
+    <script>
+      ScrollTrigger.create({
+        trigger: ".stay-a-while-section",
+        start: "top center",
+        end: "bottom center+=57px",
+        pin: ".stay-a-while-pin",
+        markers: true, // Show debug markers
+        id: "stay-a-while" // Unique id, also added to name of debug markers
+      });
+    </script>
+
+    <div style="height: 300px;"></div>
+    <div style="height: 300px; background-color: #666;"></div>
+    <div style="height: 300px;"></div>
+
+    <!-- WATCH: https://www.youtube.com/watch?v=X7IBa7vZjmo -->
+
+    <!----------------------------------->
+    <!-- Pin with animations -->
+    <!----------------------------------->
+    <!-- https://codepen.io/GreenSock/pen/zYrELYe -->
 
     <!----------------------------------->
     <!-- Fillers -->
