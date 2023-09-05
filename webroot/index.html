@@ -70,7 +70,7 @@
     <style>
       .happy {
         display: flex;
-        height: 900px;
+        height: 1100px;
         align-items: center;
         justify-content: center;
         flex-direction: column;
@@ -82,7 +82,8 @@
       .happy-happy,
       .happy-glad,
       .happy-sunshine,
-      .happy-bag {
+      .happy-bag,
+      .happy-cage {
         padding: 40px;
         margin-top: 50px;
         margin-bottom: 50px;
@@ -106,6 +107,10 @@
         background-color: #aaa;
       }
 
+      .happy-cage {
+        background-color: #85144b;
+      }
+
     </style>
 
     <div class="happy">
@@ -116,6 +121,8 @@
       <div class="happy-sunshine">I've got sunshine!</div>
 
       <div class="happy-bag">In a bag!<br>(with scrub)</div>
+
+      <div class="happy-cage">Someone let me<br>out of my cage</div>
     </div>
 
     <script>
@@ -170,6 +177,27 @@
           scrub: 1, /* Links to scrollbar, with delay of 1 sec, to smooth things out */
           // markers: true, /* Show debug markers */
           // id: "bag" /* Unique id, also added to name of debug markers */
+        }
+      });
+    </script>
+
+    <!----------------------------------->
+    <!-- Play when entering the screen then restart if scrolled back up -->
+    <!----------------------------------->
+
+    <script>
+      gsap.set('.happy-cage', {x: -400}); /* Starting conditions, progressive enhancement */
+      gsap.to('.happy-cage', {
+        x: 0, /* Move happy square to right */
+        rotation: 360, /* While rotating */
+        duration: 3,
+        scrollTrigger: {
+          trigger: ".happy-cage", /* The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts. */
+          toggleActions: "restart none none none", // Actions: onEnter, onLeave, onEnterBack, onLeaveBack. The default is "play none none none". Can use: play, pause, resume, reset, restart, complete, reverse, none
+          start: "top bottom", /* When top of the trigger, hits center of the screen */
+          end: "bottom bottom", /* When top of the trigger, hits center of the screen */
+          markers: true, /* Show debug markers */
+          id: "cage" /* Unique id, also added to name of debug markers */
         }
       });
     </script>
@@ -334,8 +362,8 @@
         end: "bottom center+=" + pinnedElementHeight + "px", // When bottom of the endTrigger (container), hits pinnedElementHeight px below the center of the screen
         pin: ".lobscouse-pin", // Always pin container of elements
         pinSpacing: false, // Setting to false makes next sections scroll under the pined element. Something like pushFollowers in ScrollMagic
-        markers: true, // Show debug markers
-        id: "lobscouse" // Unique id, also added to name of debug markers
+        // markers: true, // Show debug markers
+        // id: "lobscouse" // Unique id, also added to name of debug markers
       });
     </script>
 
