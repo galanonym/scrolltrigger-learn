@@ -274,12 +274,68 @@
 
     <script>
       ScrollTrigger.create({
-        trigger: ".stay-a-while-section",
-        start: "top center",
-        end: "bottom center+=57px",
-        pin: ".stay-a-while-pin",
+        trigger: ".stay-a-while-section", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+        start: "top center", // When top of the trigger, hits center of the screen
+        end: "bottom center+=57px", // When bottom of the trigger (container), hits 57 px below center of the screen
+        pin: ".stay-a-while-pin", // Always pin container of elements
+        // markers: true, // Show debug markers
+        // id: "stay-a-while" // Unique id, also added to name of debug markers
+      });
+    </script>
+
+    <div style="height: 300px;"></div>
+    <div style="height: 300px; background-color: #666;"></div>
+    <div style="height: 300px;"></div>
+
+    <!----------------------------------->
+    <!-- Pin with overlapping  -->
+    <!----------------------------------->
+    <style>
+      .lobscouse-wrapper { /* We use wrapper to define background behind lobscouse-box */
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(207,189,119,1) 0%, rgba(0,212,255,1) 100%);
+      }
+
+      .lobscouse-box {
+        background-color: #000;
+        color: #fff;
+        margin: 0 auto;
+        max-width: 300px;
+        font-size: 24px;
+        text-align: center;
+      }
+
+      .lobscouse-another-section {
+        height: 600px;
+        text-align: center;
+        padding-top: 40px;
+        background-color: #ddd;
+      }
+    </style>
+
+    <div class="lobscouse-wrapper">
+      <div class="lobscouse-pin"> <!-- Everything inside this container will be pinned (position: fixed;) -->
+        <div class="lobscouse-box">Lapskaus is a good meal</div>
+        <div class="lobscouse-box">I love it!</div>
+      </div>
+    </div>
+
+    <div class="lobscouse-another-section">
+      This is another section, that will be overlapped by lobscouse
+    </div>
+
+    <script>
+      var pinnedElementHeight = document.querySelector('.lobscouse-pin').offsetHeight; // We calculate height of .lobscouse-pin so that it will stop correctly at the end:
+
+      ScrollTrigger.create({
+        trigger: ".lobscouse-wrapper", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+        start: "top center", // When top of the trigger, hits center of the screen
+        endTrigger: ".lobscouse-another-section",
+        end: "bottom center+=" + pinnedElementHeight + "px", // When bottom of the endTrigger (container), hits pinnedElementHeight px below the center of the screen
+        pin: ".lobscouse-pin", // Always pin container of elements
+        pinSpacing: false, // Setting to false makes next sections scroll under the pined element. Something like pushFollowers in ScrollMagic
         markers: true, // Show debug markers
-        id: "stay-a-while" // Unique id, also added to name of debug markers
+        id: "lobscouse" // Unique id, also added to name of debug markers
       });
     </script>
 
