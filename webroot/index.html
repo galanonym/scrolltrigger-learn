@@ -194,8 +194,10 @@
         scrollTrigger: {
           trigger: ".happy-cage", /* The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts. */
           toggleActions: "restart none none none", // Actions: onEnter, onLeave, onEnterBack, onLeaveBack. The default is "play none none none". Can use: play, pause, resume, reset, restart, complete, reverse, none
-          start: "top bottom", /* When top of the trigger, hits center of the screen */
-          end: "bottom bottom", /* When top of the trigger, hits center of the screen */
+          // toggleActions: "restart pause resume none",
+          // toggleActions: "restart pause reverse none",
+          start: "top bottom", /* When top of the trigger, hits bottom of the screen (goes onscreen)*/
+          end: "bottom top", /* When bottom of the trigger, hits top of the screen (goes offscreen)*/
           markers: true, /* Show debug markers */
           id: "cage" /* Unique id, also added to name of debug markers */
         }
