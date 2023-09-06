@@ -165,10 +165,10 @@
           scrollTrigger: {
             trigger: ".happy-sunshine", /* The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts. */
             start: "top center", /* When top of the trigger, hits center of the screen */
-            end: "top 300px", /* When top of the trigger, hits 300px down from the top of the scroller */
+            end: "top center-=300px", /* When top of the trigger, hits 300px up from the center of the scroller */
             scrub: true, /* Links the animation's progress directly to the ScrollTrigger's progress. */
-            // markers: true, /* Show debug markers */
-            // id: "sunshine" /* Unique id, also added to name of debug markers */
+            markers: true, /* Show debug markers */
+            id: "sunshine" /* Unique id, also added to name of debug markers */
           }
         });
       });
@@ -415,7 +415,7 @@
       .powerpoint-panel {
         position: absolute;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -439,11 +439,84 @@
         color: #fff;
       }
 
+      .powerpoint-green {
+        background-image: linear-gradient(
+          45deg,
+          hsl(106deg 100% 20%) 0%,
+          hsl(91deg 100% 23%) 11%,
+          hsl(82deg 100% 26%) 22%,
+          hsl(76deg 100% 28%) 33%,
+          hsl(71deg 99% 31%) 44%,
+          hsl(67deg 99% 34%) 56%,
+          hsl(63deg 98% 37%) 67%,
+          hsl(60deg 97% 41%) 78%,
+          hsl(57deg 96% 46%) 89%,
+          hsl(55deg 100% 51%) 100%
+        );
+      }
+
+      .powerpoint-blue {
+        background-image: linear-gradient(
+          45deg,
+          hsl(203deg 97% 40%) 0%,
+          hsl(215deg 61% 54%) 11%,
+          hsl(224deg 60% 61%) 22%,
+          hsl(233deg 61% 66%) 33%,
+          hsl(243deg 64% 70%) 44%,
+          hsl(252deg 70% 71%) 56%,
+          hsl(259deg 77% 73%) 67%,
+          hsl(265deg 84% 74%) 78%,
+          hsl(270deg 92% 75%) 89%,
+          hsl(274deg 100% 76%) 100%
+        );
+      }
+
+      .powerpoint-yellow {
+        background-image: linear-gradient(
+          45deg,
+          hsl(60deg 100% 52%) 0%,
+          hsl(57deg 100% 61%) 11%,
+          hsl(53deg 100% 66%) 22%,
+          hsl(48deg 100% 69%) 33%,
+          hsl(41deg 100% 72%) 44%,
+          hsl(33deg 100% 75%) 56%,
+          hsl(23deg 100% 77%) 67%,
+          hsl(11deg 100% 79%) 78%,
+          hsl(356deg 100% 80%) 89%,
+          hsl(343deg 100% 76%) 100%
+        );
+      }
+
     </style>
 
     <div class="powerpoint-pin"> <!-- Everything inside this container will be pinned (position: fixed;) -->
-      <div class="powerpoint-panel powerpoint-red">I got this feeling on the summer day</div>
+      <div class="powerpoint-panel powerpoint-red">I got this feeling on the summer day!</div>
+      <div class="powerpoint-panel powerpoint-green">When you were gone!</div>
+      <div class="powerpoint-panel powerpoint-blue">I crashed my car into bridge!</div>
+      <div class="powerpoint-panel powerpoint-yellow">I watched, I let it burn!</div>
     </div>
+
+    <script>
+      $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
+        var powerpointTimeline = gsap.timeline();
+        powerpointTimeline.from(".powerpoint-green", { xPercent: -100 });
+        powerpointTimeline.from(".powerpoint-blue", { xPercent: 100 });
+        powerpointTimeline.from(".powerpoint-yellow", { yPercent: -100 });
+        /* Think of a gsap.from() like a backwards tween where you define where the values should START, and then it animates to the current state which is perfect for animating objects onto the screen because you can set them up the way you want them to look at the end and then animate in from elsewhere. */
+
+        ScrollTrigger.create({
+          animation: powerpointTimeline, // GSAP Tween or Timeline to controll through scrolltrigger
+          trigger: ".powerpoint-pin", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+          start: "top top", // We start when top of the trigger element (slide) hits top of the screen, so when slide is on screen
+          end: "+=4000", // How many pixels will deterimne how fast the animation will be
+          scrub: true, // Connect to scroll
+          pin: true, // Pin "true" will couse trigger element to be pinned
+          anticipatePin: 1, // When pinning large sections you should use this for smoother browser experience
+          // markers: true, // Show debug markers
+          // id: "powerpoint" // Unique id, also added to name of debug markers
+        });
+      });
+    </script>
 
     <div style="height: 300px;"></div>
     <div style="height: 300px; background-color: #666;"></div>
