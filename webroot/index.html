@@ -73,7 +73,7 @@
     <style>
       .happy {
         display: flex;
-        height: 1100px;
+        height: 1300px;
         align-items: center;
         justify-content: center;
         flex-direction: column;
@@ -86,7 +86,8 @@
       .happy-glad,
       .happy-sunshine,
       .happy-bag,
-      .happy-cage {
+      .happy-cage,
+      .happy-gorilla {
         padding: 40px;
         margin-top: 50px;
         margin-bottom: 50px;
@@ -114,6 +115,19 @@
         background-color: #85144b;
       }
 
+      .happy-gorilla {
+        background-color: #fff;
+        color: #000;
+        border: 2px solid #000;
+        transition: all 0.3s ease-out;
+      }
+
+      .happy-gorilla.active {
+        background-color: #000;
+        color: #fff;
+        border: none;
+      }
+
     </style>
 
     <div class="happy">
@@ -126,31 +140,33 @@
       <div class="happy-bag">In a bag!<br>(with scrub)</div>
 
       <div class="happy-cage">Someone let me<br>out of my cage</div>
+
+      <div class="happy-gorilla">Gorilla...</div>
     </div>
 
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
-        gsap.set('.happy-happy', {x: -400}); /* First we set the starting conditions */
+        gsap.set('.happy-happy', {x: -400}); // First we set the starting conditions
         gsap.to('.happy-happy', {
-          x: 0, /* Move happy square to right */
-          rotation: 360, /* While rotating */
-          duration: 3 /* In total 3 seconds */
+          x: 0, // Move happy square to right
+          rotation: 360, // While rotating
+          duration: 3 // In total 3 seconds
         });
       });
     </script>
 
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
-        gsap.set('.happy-glad', {x: -400}); /* Starting conditions, progressive enhancement */
+        gsap.set('.happy-glad', {x: -400}); // Starting conditions, progressive enhancement
         gsap.to('.happy-glad', {
-          x: 0, /* Move happy square to right */
-          rotation: 360, /* While rotating */
+          x: 0, // Move happy square to right
+          rotation: 360, // While rotating
           duration: 3,
           scrollTrigger: {
-            trigger: ".happy-glad", /* The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts. */
-            start: 'top center', /* When top of the trigger, hits center of the screen */
-            // markers: true, /* Show debug markers */
-            // id: "glad" /* Unique id, also added to name of debug markers */
+            trigger: ".happy-glad", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+            start: 'top center', // When top of the trigger, hits center of the screen
+            // markers: true, // Show debug markers
+            // id: "glad" // Unique id, also added to name of debug markers
           }
         });
       });
@@ -158,17 +174,17 @@
 
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
-        gsap.set('.happy-sunshine', {x: -400}); /* Starting conditions, progressive enhancement */
+        gsap.set('.happy-sunshine', {x: -400}); // Starting conditions, progressive enhancement
         gsap.to('.happy-sunshine', {
-          x: 0, /* Move happy square to right */
-          rotation: 360, /* While rotating */
+          x: 0, // Move happy square to right
+          rotation: 360, // While rotating
           scrollTrigger: {
-            trigger: ".happy-sunshine", /* The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts. */
-            start: "top center", /* When top of the trigger, hits center of the screen */
-            end: "top center-=300px", /* When top of the trigger, hits 300px up from the center of the scroller */
-            scrub: true, /* Links the animation's progress directly to the ScrollTrigger's progress. */
-            markers: true, /* Show debug markers */
-            id: "sunshine" /* Unique id, also added to name of debug markers */
+            trigger: ".happy-sunshine", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+            start: "top center", // When top of the trigger, hits center of the screen
+            end: "top center-=300px", // When top of the trigger, hits 300px up from the center of the scroller
+            scrub: true, // Links the animation's progress directly to the ScrollTrigger's progress.
+            // markers: true, // Show debug markers
+            // id: "sunshine" // Unique id, also added to name of debug markers
           }
         });
       });
@@ -176,18 +192,31 @@
 
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
-        gsap.set('.happy-bag', {x: -400}); /* Starting conditions, progressive enhancement */
+        gsap.set('.happy-bag', {x: -400}); // Starting conditions, progressive enhancement
         gsap.to('.happy-bag', {
-          x: 0, /* Move happy square to right */
-          rotation: 360, /* While rotating */
+          x: 0, // Move happy square to right
+          rotation: 360, // While rotating
           scrollTrigger: {
-            trigger: ".happy-bag", /* The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts. */
-            start: "top center", /* When top of the trigger, hits center of the screen */
-            end: "+=300px", /* Relative value, so 300px from the top of the trigger, same center of the screen */
-            scrub: 1, /* Links to scrollbar, with delay of 1 sec, to smooth things out */
-            // markers: true, /* Show debug markers */
-            // id: "bag" /* Unique id, also added to name of debug markers */
+            trigger: ".happy-bag", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+            start: "top center", // When top of the trigger, hits center of the screen
+            end: "+=300px", // Relative value, so 300px from the top of the trigger, same center of the screen
+            scrub: 1, // Links to scrollbar, with delay of 1 sec, to smooth things out
+            // markers: true, // Show debug markers
+            // id: "bag" // Unique id, also added to name of debug markers
           }
+        });
+      });
+    </script>
+
+    <script>
+      $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
+        ScrollTrigger.create({
+          trigger: '.happy-gorilla',
+          start: 'top center',
+          end: 'top center-=300px',
+          toggleClass: 'active',
+          markers: true, // Show debug markers
+          id: "gorilla" // Unique id, also added to name of debug markers
         });
       });
     </script>
@@ -198,21 +227,21 @@
 
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
-        gsap.set('.happy-cage', {x: -400}); /* Starting conditions, progressive enhancement */
+        gsap.set('.happy-cage', {x: -400}); // Starting conditions, progressive enhancement
         gsap.to('.happy-cage', {
-          x: 0, /* Move happy square to right */
-          rotation: 360, /* While rotating */
+          x: 0, // Move happy square to right
+          rotation: 360, // While rotating
           duration: 3,
           scrollTrigger: {
-            trigger: ".happy-cage", /* The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts. */
+            trigger: ".happy-cage", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
             toggleActions: "restart none none none", // Actions: onEnter, onLeave, onEnterBack, onLeaveBack. The default is "play none none none". Can use: play, pause, resume, reset, restart, complete, reverse, none
             // toggleActions: "restart pause resume none",
             // toggleActions: "restart pause reverse none",
-            /* NB! start & end, have default values, so they can be commented */
-            start: "top bottom", /* When top of the trigger, hits bottom of the screen (goes onscreen)*/
-            end: "bottom top", /* When bottom of the trigger, hits top of the screen (goes offscreen)*/
-            // markers: true, /* Show debug markers */
-            // id: "cage" /* Unique id, also added to name of debug markers */
+            // NB! start & end, have default values, so they can be commented
+            start: "top bottom", // When top of the trigger, hits bottom of the screen (goes onscreen
+            end: "bottom top", // When bottom of the trigger, hits top of the screen (goes offscreen
+            // markers: true, // Show debug markers
+            // id: "cage" // Unique id, also added to name of debug markers
           }
         });
       });
@@ -233,7 +262,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        overflow: hidden; /* No horizontal bar on mobile fix */
+        overflow: hidden; // No horizontal bar on mobile fix
 
         background-color: #fafad3;
       }
@@ -256,7 +285,7 @@
 
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
-        gsap.set('.useless-box', {x: -400}); /* Starting conditions, progressive enhancement */
+        gsap.set('.useless-box', {x: -400}); // Starting conditions, progressive enhancement
 
         var timeline = gsap.timeline({
           scrollTrigger: {
@@ -272,7 +301,7 @@
         timeline.to('.useless-box', {y: -300, duration: 1});
         timeline.to('.useless-box', {opacity: 0, duration: 0.5});
         timeline.to('.useless-box', {opacity: 1, duration: 0.5});
-        timeline.to('.useless-box', {text: 'But not for long...', duration: 1}); /* Uses TextPlugin */
+        timeline.to('.useless-box', {text: 'But not for long...', duration: 1}); ///Uses TextPlugin
         timeline.to('.useless-box', {y: 0, duration: 1});
         timeline.to('.useless-box', {rotation: 360, duration: 1});
       });
@@ -325,7 +354,6 @@
           start: "top center", // When top of the trigger, hits center of the screen
           end: "bottom center+=57px", // When bottom of the trigger (container), hits 57 px below center of the screen
           pin: ".stay-a-while-pin", // Always pin container of elements
-          // pinSpacing: false, // Fixes the bug where screen snaps to this pin on screen refresh
           // markers: true, // Show debug markers
           // id: "stay-a-while" // Unique id, also added to name of debug markers
         });
@@ -514,6 +542,80 @@
           anticipatePin: 1, // When pinning large sections you should use this for smoother browser experience
           // markers: true, // Show debug markers
           // id: "powerpoint" // Unique id, also added to name of debug markers
+        });
+      });
+    </script>
+
+    <div style="height: 300px;"></div>
+    <div style="height: 300px; background-color: #666;"></div>
+    <div style="height: 300px;"></div>
+
+    <!----------------------------------->
+    <!-- Pin with events -->
+    <!----------------------------------->
+
+    <style>
+      .wind {
+        display: flex;
+        height: 1100px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden; /* No horizontal bar on mobile fix */
+
+        background-image: linear-gradient( 45deg, hsl(240deg 19% 82%) 0%, hsl(271deg 22% 82%) 11%, hsl(309deg 25% 82%) 22%, hsl(334deg 44% 85%) 33%, hsl(350deg 64% 87%) 44%, hsl(5deg 81% 87%) 56%, hsl(16deg 89% 86%) 67%, hsl(27deg 83% 84%) 78%, hsl(38deg 69% 81%) 89%, hsl(55deg 50% 79%) 100%);
+      }
+
+      .wind-box {
+        padding: 40px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        border-radius: 5px;
+        color: white;
+      }
+
+      .wind-magic {
+        background-color: #f38a79;
+      }
+    </style>
+
+    <div class="wind">
+      <div class="wind-box wind-magic">
+        <span>Take me to the magic of the moment</span>
+        <br><br>
+        <b><span class="wind-message">???</span></b>
+        <br><br>
+        <b><span class="wind-progress">???</span></b>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
+        ScrollTrigger.create({
+          trigger: '.wind-box', // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+          start: 'top center', // When top of the trigger, hits center of the screen
+          end: 'top center-=300px', // When top of the trigger, hits 300px up from the center of the scroller
+          onEnter: function() {
+            // console.log('Enter!');
+            $('.wind-message').text('Entered!')
+          },
+          onLeave: function() {
+            // console.log('Leave!');
+            $('.wind-message').text('Left!')
+          },
+          onEnterBack: function() {
+            // console.log('EnterBack!');
+            $('.wind-message').text('Back entered!')
+          },
+          onLeaveBack: function() {
+            // console.log('LeaveBack!');
+            $('.wind-message').text('Back left!')
+          },
+          onUpdate: function(self) { // ScrollTrigger instance itself gets passed in, we can use self to get some statistics
+            $('.wind-progress').text(self.progress.toFixed(3));
+          },
+          // markers: true, // Show debug markers
+          // id: 'wind' // Unique id, also added to name of debug markers
         });
       });
     </script>
