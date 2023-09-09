@@ -215,8 +215,8 @@
           start: 'top center',
           end: 'top center-=300px',
           toggleClass: 'active',
-          markers: true, // Show debug markers
-          id: "gorilla" // Unique id, also added to name of debug markers
+          // markers: true, // Show debug markers
+          // id: "gorilla" // Unique id, also added to name of debug markers
         });
       });
     </script>
@@ -621,6 +621,84 @@
     <!-- @Todo Pin with animations -->
     <!----------------------------------->
     <!-- https://codepen.io/GreenSock/pen/zYrELYe -->
+
+    <style>
+      .tiny-toon-pin {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tiny-toon-background {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background-image: url('/tiny-toon.webp');
+        background-size: cover;
+        background-position: bottom center;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .tiny-toon-bugs {
+        font-size: 40px;
+        color: white;
+        font-weight: 800;
+      }
+
+      .tiny-toon-bugs {
+        font-size: 40px;
+        color: #fff;
+        font-weight: 800;
+      }
+
+      .tiny-toon-and {
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+
+      .tiny-toon-daffy {
+        font-size: 25px;
+        color: #fff;
+        font-weight: 400;
+      }
+    </style>
+
+    <div class="tiny-toon-pin"> <!-- Everything inside this container will be pinned (position: fixed;) -->
+      <div class="tiny-toon-background">
+        <div class="tiny-toon-bugs">Bugs bunny</div>
+        <div class="tiny-toon-and">&amp;</div>
+        <div class="tiny-toon-daffy">Daffy duck</div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
+        var tinyToonTimeline = gsap.timeline();
+        tinyToonTimeline.add('Label Start'); // Add label, so that we can start two animations at once in parallell
+        tinyToonTimeline.to(".tiny-toon-bugs", { rotation: 360 }, 'label start'); // third parameter is label on timeline for where to start animation
+        tinyToonTimeline.to(".tiny-toon-daffy", { rotation: -360 }, 'Label Start'); // third parameter is label on timeline for where to start animation
+
+        ScrollTrigger.create({
+          animation: tinyToonTimeline, // GSAP Tween or Timeline to controll through scrolltrigger
+          trigger: ".tiny-toon-pin", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+          start: "top top", // We start when top of the trigger element (slide) hits top of the screen, so when slide is on screen
+          end: "+=400", // How many pixels will deterimne how fast the animation will be
+          scrub: true, // Connect to scroll
+          pin: true, // Pin "true" will couse trigger element to be pinned
+          anticipatePin: 1, // When pinning large sections you should use this for smoother browser experience
+          markers: true, // Show debug markers
+          id: "tiny-toon" // Unique id, also added to name of debug markers
+        });
+      });
+    </script>
 
     <!----------------------------------->
     <!-- Fillers -->
