@@ -158,16 +158,18 @@
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
         gsap.set('.happy-glad', {x: -400}); // Starting conditions, progressive enhancement
-        gsap.to('.happy-glad', {
+        var tween = gsap.to('.happy-glad', {
           x: 0, // Move happy square to right
           rotation: 360, // While rotating
           duration: 3,
-          scrollTrigger: {
-            trigger: ".happy-glad", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
-            start: 'top center', // When top of the trigger, hits center of the screen
-            // markers: true, // Show debug markers
-            // id: "glad" // Unique id, also added to name of debug markers
-          }
+        });
+
+        ScrollTrigger.create({
+          animation: tween, // GSAP Tween or Timeline to controll through scrolltrigger
+          trigger: ".happy-glad", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+          start: 'top center', // When top of the trigger, hits center of the screen
+          // markers: true, // Show debug markers
+          // id: "glad" // Unique id, also added to name of debug markers
         });
       });
     </script>
@@ -175,17 +177,19 @@
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
         gsap.set('.happy-sunshine', {x: -400}); // Starting conditions, progressive enhancement
-        gsap.to('.happy-sunshine', {
+        var tween = gsap.to('.happy-sunshine', {
           x: 0, // Move happy square to right
           rotation: 360, // While rotating
-          scrollTrigger: {
-            trigger: ".happy-sunshine", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
-            start: "top center", // When top of the trigger, hits center of the screen
-            end: "top center-=300px", // When top of the trigger, hits 300px up from the center of the scroller
-            scrub: true, // Links the animation's progress directly to the ScrollTrigger's progress.
-            // markers: true, // Show debug markers
-            // id: "sunshine" // Unique id, also added to name of debug markers
-          }
+        });
+
+        ScrollTrigger.create({
+          animation: tween, // GSAP Tween or Timeline to controll through scrolltrigger
+          trigger: ".happy-sunshine", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+          start: "top center", // When top of the trigger, hits center of the screen
+          end: "top center-=300px", // When top of the trigger, hits 300px up from the center of the scroller
+          scrub: true, // Links the animation's progress directly to the ScrollTrigger's progress.
+          // markers: true, // Show debug markers
+          // id: "sunshine" // Unique id, also added to name of debug markers
         });
       });
     </script>
@@ -193,17 +197,19 @@
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
         gsap.set('.happy-bag', {x: -400}); // Starting conditions, progressive enhancement
-        gsap.to('.happy-bag', {
+        var tween = gsap.to('.happy-bag', {
           x: 0, // Move happy square to right
           rotation: 360, // While rotating
-          scrollTrigger: {
-            trigger: ".happy-bag", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
-            start: "top center", // When top of the trigger, hits center of the screen
-            end: "+=300px", // Relative value, so 300px from the top of the trigger, same center of the screen
-            scrub: 1, // Links to scrollbar, with delay of 1 sec, to smooth things out
-            // markers: true, // Show debug markers
-            // id: "bag" // Unique id, also added to name of debug markers
-          }
+        });
+
+        ScrollTrigger.create({
+          animation: tween, // GSAP Tween or Timeline to controll through scrolltrigger
+          trigger: ".happy-bag", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+          start: "top center", // When top of the trigger, hits center of the screen
+          end: "+=300px", // Relative value, so 300px from the top of the trigger, same center of the screen
+          scrub: 1, // Links to scrollbar, with delay of 1 sec, to smooth things out
+          // markers: true, // Show debug markers
+          // id: "bag" // Unique id, also added to name of debug markers
         });
       });
     </script>
@@ -228,28 +234,29 @@
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
         gsap.set('.happy-cage', {x: -400}); // Starting conditions, progressive enhancement
-        gsap.to('.happy-cage', {
+        var tween = gsap.to('.happy-cage', {
           x: 0, // Move happy square to right
           rotation: 360, // While rotating
           duration: 3,
-          scrollTrigger: {
-            trigger: ".happy-cage", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
-            toggleActions: "restart none none none", // Actions: onEnter, onLeave, onEnterBack, onLeaveBack. The default is "play none none none". Can use: play, pause, resume, reset, restart, complete, reverse, none
-            // toggleActions: "restart pause resume none",
-            // toggleActions: "restart pause reverse none",
-            // NB! start & end, have default values, so they can be commented
-            start: "top bottom", // When top of the trigger, hits bottom of the screen (goes onscreen
-            end: "bottom top", // When bottom of the trigger, hits top of the screen (goes offscreen
-            // markers: true, // Show debug markers
-            // id: "cage" // Unique id, also added to name of debug markers
-          }
+        });
+
+        ScrollTrigger.create({
+          animation: tween, // GSAP Tween or Timeline to controll through scrolltrigger
+          trigger: ".happy-cage", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+          toggleActions: "restart none none none", // Actions: onEnter, onLeave, onEnterBack, onLeaveBack. The default is "play none none none". Can use: play, pause, resume, reset, restart, complete, reverse, none
+          // toggleActions: "restart pause resume none",
+          // toggleActions: "restart pause reverse none",
+          // NB! start & end, have default values, so they can be commented
+          start: "top bottom", // When top of the trigger, hits bottom of the screen (goes onscreen
+          end: "bottom top", // When bottom of the trigger, hits top of the screen (goes offscreen
+          // markers: true, // Show debug markers
+          // id: "cage" // Unique id, also added to name of debug markers
         });
       });
     </script>
 
     <div style="height: 300px;"></div>
     <div style="height: 300px; background-color: #666;"></div>
-    <div style="height: 300px;"></div>
 
     <!----------------------------------->
     <!-- Animation with timeline attached to scroll -->
@@ -287,16 +294,7 @@
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
         gsap.set('.useless-box', {x: -400}); // Starting conditions, progressive enhancement
 
-        var timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: '.useless', // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
-            start: 'top center', // When top of the trigger, hits center of the screen
-            end: 'bottom center', // When bottom of the trigger (container), hits center of the screen
-            scrub: 1, // Links to scrollbar, with delay of 1 sec, to smooth things out
-            // markers: true, // Show debug markers
-            // id: "useless" // Unique id, also added to name of debug markers
-          }
-        });
+        var timeline = gsap.timeline();
         timeline.to('.useless-box', {x: 0, rotation: 360, duration: 3}); // It calculates duration of animation based on durations here, so first .to() takes more time
         timeline.to('.useless-box', {y: -300, duration: 1});
         timeline.to('.useless-box', {opacity: 0, duration: 0.5});
@@ -304,10 +302,19 @@
         timeline.to('.useless-box', {text: 'But not for long...', duration: 1}); ///Uses TextPlugin
         timeline.to('.useless-box', {y: 0, duration: 1});
         timeline.to('.useless-box', {rotation: 360, duration: 1});
+
+        ScrollTrigger.create({
+          animation: timeline, // GSAP Tween or Timeline to controll through scrolltrigger
+          trigger: '.useless', // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+          start: 'top center', // When top of the trigger, hits center of the screen
+          end: 'bottom center', // When bottom of the trigger (container), hits center of the screen
+          scrub: 1, // Links to scrollbar, with delay of 1 sec, to smooth things out
+          // markers: true, // Show debug markers
+          // id: "useless" // Unique id, also added to name of debug markers
+        });
       });
     </script>
 
-    <div style="height: 300px;"></div>
     <div style="height: 300px; background-color: #666;"></div>
     <div style="height: 300px;"></div>
 
