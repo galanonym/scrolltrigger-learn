@@ -742,8 +742,71 @@
           start: "top bottom", // We start when top of the trigger element (slide) hits bottom of the screen
           end: "bottom top", // We end when bottom of the trigger element (slide) hits top of the screen
           scrub: 0.5, // Connect to scroll
+          // markers: true, // Show debug markers
+          // id: "japan" // Unique id, also added to name of debug markers
+        });
+      });
+    </script>
+
+    <div style="height: 300px;"></div>
+    <div style="height: 300px; background-color: #666;"></div>
+    <div style="height: 300px;"></div>
+
+    <!----------------------------------->
+    <!-- Paralax Double Div Any Size -->
+    <!----------------------------------->
+
+    <style>
+      .stars {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .parallax-outer {
+        position: relative;
+        /* max-width: 700px; */
+        overflow: hidden;
+      }
+
+      .parallax-inner {
+        position: absolute;
+        top: -20%;
+        bottom: -20%;
+        left: 0;
+        right: 0;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .parallax-hidden-img {
+        max-width: 100%;
+        visibility: hidden;
+      }
+    </style>
+
+    <div class="stars">
+      <div class="parallax-outer">
+        <img class="parallax-hidden-img" src="stars.jpg">
+        <div class="parallax-inner" style="background-image: url('stars.jpg');"></div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
+        var starsTimeline = gsap.timeline();
+        starsTimeline.set('.parallax-inner', { yPercent: '-20', ease: 'none'});
+        starsTimeline.to('.parallax-inner', { yPercent: '20', ease: 'none'});
+
+        ScrollTrigger.create({
+          animation: starsTimeline, // GSAP Tween or Timeline to controll through scrolltrigger
+          trigger: ".parallax-outer", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+          start: "top bottom", // We start when top of the trigger element (slide) hits bottom of the screen
+          end: "bottom top", // We end when bottom of the trigger element (slide) hits top of the screen
+          scrub: 0.5, // Connect to scroll
           markers: true, // Show debug markers
-          id: "japan" // Unique id, also added to name of debug markers
+          id: "stars" // Unique id, also added to name of debug markers
         });
       });
     </script>
