@@ -757,11 +757,21 @@
     <!----------------------------------->
 
     <style>
-      .stars {
+      .stars-wrapper {
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+      }
+
+      .stars-first {
+        max-width: 500px;
+      }
+
+      .stars-second {
+        max-width: 600px;
+        margin-top: 30px;
       }
 
       .parallax-outer {
@@ -786,28 +796,47 @@
       }
     </style>
 
-    <div class="stars">
-      <div class="parallax-outer">
-        <img class="parallax-hidden-img" src="stars.jpg">
-        <div class="parallax-inner" style="background-image: url('stars.jpg');"></div>
+    <div class="stars-wrapper">
+      <div class="stars-first">
+        <div class="parallax-outer">
+          <img class="parallax-hidden-img" src="stars1.jpg">
+          <div class="parallax-inner" style="background-image: url('stars1.jpg');"></div>
+        </div>
+      </div>
+
+      <div class="stars-second">
+        <div class="parallax-outer">
+          <img class="parallax-hidden-img" src="stars2.jpg">
+          <div class="parallax-inner" style="background-image: url('stars2.jpg');"></div>
+        </div>
       </div>
     </div>
 
     <script>
       $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
-        var starsTimeline = gsap.timeline();
-        starsTimeline.set('.parallax-inner', { yPercent: '-20', ease: 'none'});
-        starsTimeline.to('.parallax-inner', { yPercent: '20', ease: 'none'});
 
-        ScrollTrigger.create({
-          animation: starsTimeline, // GSAP Tween or Timeline to controll through scrolltrigger
-          trigger: ".parallax-outer", // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
-          start: "top bottom", // We start when top of the trigger element (slide) hits bottom of the screen
-          end: "bottom top", // We end when bottom of the trigger element (slide) hits top of the screen
-          scrub: 0.5, // Connect to scroll
-          markers: true, // Show debug markers
-          id: "stars" // Unique id, also added to name of debug markers
+        var $items = $('.stars-first').add('.stars-second');
+        console.log($items);
+
+        $items.each(function(index, item) {
+          var $inner = $(item).find('.parallax-inner');
+          var $outer = $(item).find('.parallax-outer');
+
+          var timeline = gsap.timeline();
+          timeline.set($inner, { yPercent: '-20', ease: 'none'});
+          timeline.to($inner, { yPercent: '20', ease: 'none'});
+
+          ScrollTrigger.create({
+            animation: timeline, // GSAP Tween or Timeline to controll through scrolltrigger
+            trigger: $outer, // The element (or selector text for the element) whose position in the normal document flow is used to calculate where the ScrollTrigger starts.
+            start: 'top bottom', // We start when top of the trigger element (slide) hits bottom of the screen
+            end: 'bottom top', // We end when bottom of the trigger element (slide) hits top of the screen
+            scrub: 0.1, // Connect to scroll
+            // markers: true, // Show debug markers
+            // id: 'stars' // Unique id, also added to name of debug markers
+          });
         });
+
       });
     </script>
 
