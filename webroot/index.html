@@ -188,8 +188,8 @@
           start: "top center", // When top of the trigger, hits center of the screen
           end: "top center-=300px", // When top of the trigger, hits 300px up from the center of the scroller
           scrub: true, // Links the animation's progress directly to the ScrollTrigger's progress.
-          // markers: true, // Show debug markers
-          // id: "sunshine" // Unique id, also added to name of debug markers
+          markers: true, // Show debug markers
+          id: "sunshine" // Unique id, also added to name of debug markers
         });
       });
     </script>
@@ -839,6 +839,166 @@
 
       });
     </script>
+
+    <div style="height: 300px;"></div>
+    <div style="height: 300px; background-color: #666;"></div>
+    <div style="height: 300px;"></div>
+
+    <!----------------------------------->
+    <!-- Infinite carousel GSAP Tween -->
+    <!----------------------------------->
+
+    <style>
+      .carousel-wrapper {
+        width: 450px;
+        height: 50px;
+        position: relative;
+        margin: 0 auto;
+
+        overflow: hidden;
+      }
+
+      .carousel-boxes {
+        position: relative;
+        left: -50px;
+      }
+
+      .carousel-box {
+        width: 50px;
+        height: 50px;
+        /* position: absolute; */
+        float: left;
+
+        font-size: 25px;
+        line-height: 50px;
+        text-align: center;
+      }
+    </style>
+
+    <div style="overflow: hidden;"><!-- Make it responsive -->
+      <div class="carousel-wrapper">
+        <div class="carousel-boxes">
+          <div class="carousel-box" style="background-color: grey;">1</div>
+          <div class="carousel-box" style="background-color: yellow;">2</div>
+          <div class="carousel-box" style="background-color: grey;">3</div>
+          <div class="carousel-box" style="background-color: yellow;">4</div>
+          <div class="carousel-box" style="background-color: grey;">5</div>
+          <div class="carousel-box" style="background-color: yellow;">6</div>
+          <div class="carousel-box" style="background-color: grey;">7</div>
+          <div class="carousel-box" style="background-color: yellow;">8</div>
+          <div class="carousel-box" style="background-color: grey;">9</div>
+          <div class="carousel-box" style="background-color: yellow;">10</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      'use strict';
+
+      $(document).ready(function() { // It is a good practice to wrap ScrollTrigger inside ready() function, so that all heights can be calculated correctly
+
+        // Set initial values needed for boxes (progressive enhancement)
+        $('.carousel-box').css('float', 'none');
+        $('.carousel-box').css('position', 'absolute');
+
+        // Set initial x values for the boxes
+        gsap.set('.carousel-box', {
+          x: function(i) {
+            return i * 50;
+          }
+        });
+
+        var tween = gsap.to(".carousel-box", {
+          duration: 5,
+          ease: "none",
+          x: "+=500", // Move each box 500px to right
+          modifiers: {
+            x: gsap.utils.unitize(function(x) {
+              return parseFloat(x) % 500; // Force x value to be between 0 and 500 using modulus
+            })
+          },
+          repeat: -1
+        });
+      });
+    </script>
+
+    <div style="height: 300px;"></div>
+    <div style="height: 300px; background-color: #666;"></div>
+    <div style="height: 300px;"></div>
+
+    <!----------------------------------->
+    <!-- Infinite carousel jQuery -->
+    <!----------------------------------->
+
+    <style>
+      .colorful-carousel {
+        width: 450px;
+        margin: 0 auto;
+
+        overflow: hidden;
+      }
+
+      .colorful-wrapper {
+        display: flex;
+      }
+
+      .colorful-item {
+        flex-shrink: 0; /* Must be here so that items have constant width */
+        width: 50px;
+        height: 50px;
+
+        font-size: 25px;
+        line-height: 50px;
+        text-align: center;
+      }
+    </style>
+
+    <div style="overflow: hidden;"><!-- Make it responsive -->
+      <div class="colorful-carousel">
+        <div class="colorful-wrapper">
+          <div class="colorful-item" style="background-color: red;">1</div>
+          <div class="colorful-item" style="background-color: green;">2</div>
+          <div class="colorful-item" style="background-color: blue;">3</div>
+          <div class="colorful-item" style="background-color: yellow;">4</div>
+          <div class="colorful-item" style="background-color: olive;">5</div>
+          <div class="colorful-item" style="background-color: grey;">6</div>
+          <div class="colorful-item" style="background-color: red;">7</div>
+          <div class="colorful-item" style="background-color: green;">8</div>
+          <div class="colorful-item" style="background-color: blue;">9</div>
+          <div class="colorful-item" style="background-color: yellow;">10</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      'use strict';
+
+      $(document).ready(function() {
+        var time = 2000;
+
+        var $wrapper = $('.colorful-wrapper');
+
+        var widthTotal = $wrapper.outerWidth();
+        var widthItem = $wrapper.children().first().outerWidth();
+
+        $wrapper.css({marginLeft: -1 * widthItem}); // Starting conditions
+
+        setIntervalImmediately(function() {
+          $wrapper.animate({marginLeft: 0}, time, 'linear', function() {
+            var $last = $wrapper.children().last();
+            $last.prependTo($wrapper);
+            $wrapper.css({marginLeft: -1 * widthItem});
+          });
+        }, time);
+
+        function setIntervalImmediately(func, interval) {
+          func();
+          return setInterval(func, interval);
+        }
+      });
+    </script>
+
+
 
     <!----------------------------------->
     <!-- Fillers -->
